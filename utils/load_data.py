@@ -4,8 +4,9 @@
 import sys
 import os
 import warnings
+from numpy import array, loadtxt
 
-def loadData(filename, minrows=10, **kwargs):
+def load_data(filename, minrows=10, **kwargs):
     """Find and load data from a text file.
 
     The data reading starts at the first matrix block of at least minrows rows
@@ -30,7 +31,6 @@ def loadData(filename, minrows=10, **kwargs):
     Return a numpy array of the data.
     See also numpy.loadtxt for more details.
     """
-    from numpy import array, loadtxt
     # determine the arguments
     delimiter = kwargs.get('delimiter')
     usecols = kwargs.get('usecols')
@@ -91,11 +91,3 @@ def loadData(filename, minrows=10, **kwargs):
             kwargs.setdefault('usecols', range(ncvblock[0]))
             rv = loadtxt(fid, **kwargs)
     return rv
-
-def main(args=sys.argv[1:]):
-    for fileanme in args:
-        output = loadData(filename=fileanme)
-        print output
-
-if __name__=="__main__":
-    sys.exit(main())
